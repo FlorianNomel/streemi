@@ -23,6 +23,9 @@ class Episodes
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $ReleaseDate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'episodes')]
+    private ?Seasons $SeasonID = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Episodes
     public function setReleaseDate(\DateTimeInterface $ReleaseDate): static
     {
         $this->ReleaseDate = $ReleaseDate;
+
+        return $this;
+    }
+
+    public function getSeasonID(): ?Seasons
+    {
+        return $this->SeasonID;
+    }
+
+    public function setSeasonID(?Seasons $SeasonID): static
+    {
+        $this->SeasonID = $SeasonID;
 
         return $this;
     }

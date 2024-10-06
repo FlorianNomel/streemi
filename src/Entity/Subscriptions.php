@@ -20,6 +20,9 @@ class Subscriptions
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $Price = null;
 
+    #[ORM\ManyToOne(inversedBy: 'SubscriptionID')]
+    private ?SubscriptionHistory $subscriptionHistory = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Subscriptions
     public function setPrice(string $Price): static
     {
         $this->Price = $Price;
+
+        return $this;
+    }
+
+    public function getSubscriptionHistory(): ?SubscriptionHistory
+    {
+        return $this->subscriptionHistory;
+    }
+
+    public function setSubscriptionHistory(?SubscriptionHistory $subscriptionHistory): static
+    {
+        $this->subscriptionHistory = $subscriptionHistory;
 
         return $this;
     }
